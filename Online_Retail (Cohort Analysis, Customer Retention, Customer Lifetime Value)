@@ -1,6 +1,6 @@
--- Customer Cohort Analysis
-
--- Let's Explore our Dataset First
+-- =====================================================
+-- 1. Data Exploration
+-- =====================================================
 USE SALES;
 
 SELECT * FROM RETAIL LIMIT 10;
@@ -22,7 +22,11 @@ WHERE CUSTOMERID IS NULL
     
 SELECT * FROM RETAIL LIMIT 10;
 -- ORDER BY INVOICEDATE DESC;
--- Let's start with the Cohort Analysis
+
+
+-- =====================================================
+-- 2. Cohort-Based Analysis of Customer Behavior
+-- ====================================================
 
 CREATE OR REPLACE VIEW RETAIL_CLEANED AS
 SELECT
@@ -36,7 +40,10 @@ WHERE CUSTOMERID IS NOT NULL
     AND QUANTITY > 0
     AND UNITPRICE > 0;
     
--- Customer Retention
+-- =====================================================
+-- 3. Customer Retention Dynamics
+-- =====================================================
+
 WITH CTE1 AS
 (SELECT 
 	CUSTOMERID,
@@ -78,13 +85,10 @@ GROUP BY FIRST_TRANSACTION_MONTH
 ORDER BY FIRST_TRANSACTION_MONTH;
 
 
+-- =====================================================
+-- 4. Customer Lifetime Value (CLV) Estimation
+-- =====================================================
 
-
-
-
-
-
--- Customer Lifetime Value
 WITH CTE1 AS
 (SELECT 
     SALES,
